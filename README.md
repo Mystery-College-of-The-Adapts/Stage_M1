@@ -10,3 +10,9 @@
 ## Fichiers intéressants du 
 
 * Fichier `core/src/main/kotlin/net/corda/core/crypto/Crypto.kt` :
+
+```javascript
+object Crypto
+```
+
+Contient :
