@@ -9,7 +9,4 @@
 
 ## Fichiers intéressants du 
 
-* core/src/main/kotlin/net/corda/core/crypto/Crypto.kt
-
-I think you should use an
-`<addr>` element here instead.
+* Fichier `core/src/main/kotlin/net/corda/core/crypto/Crypto.kt` :
