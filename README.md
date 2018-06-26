@@ -99,7 +99,7 @@ private  fun validatePrivateKey(signatureScheme: SignatureScheme, key: PrivateKe
 		is BCECPrivateKey -> key.parameters == signatureScheme.algSpec
 		is EdDSAPrivateKey -> key.params == signatureScheme.algSpec
 		is BCRSAPrivateKey, is  BCSphincs256PrivateKey  ->  true  // TODO: Check if non-ECC keys satisfy params (i.e. approved/valid RSA modulus size).
-		is MonAlgoPrivateKey -> true /* AJOUT */
+		is MonAlgoPrivateKey /* AJOUT */ -> true
 		else  ->  throw IllegalArgumentException("Unsupported key type: ${key::class}")
 	}
 }
@@ -111,13 +111,15 @@ private fun validatePublicKey(signatureScheme: SignatureScheme, key: PublicKey):
 	return when (key) {
 		is BCECPublicKey, is EdDSAPublicKey -> publicKeyOnCurve(signatureScheme, key)
 		is BCRSAPublicKey -> key.modulus.bitLength() >= 2048 // Although the recommended RSA key size is 3072, we accept any key >= 2048bits.
-		is BCSphincs256PublicKey, is MonAlgoPublicKey -> true
+		is BCSphincs256PublicKey, is MonAlgoPublicKey /* AJOUT */ -> true
 		else -> throw IllegalArgumentException("Unsupported key type: ${key::class}")
 	}
 }
 ```
 
+Q : Faut-it modifier ```toSupportedPublicKey(key: PublicKey)``` et ```toSupportedPrivateKey(key: PrivateKey)``` ?
+
 ## À regarder
 
-- [(...)/crypto/internal/ProviderMap.kt](https://github.com/corda/corda/blob/master/core/src/main/kotlin/net/corda/core/crypto/internal/ProviderMap.kt) : ajouter l'algorithme dans la liste des _providers_
+- [(...)/crypto/internal/ProviderMap.kt](https://github.com/corda/corda/blob/master/core/src/main/kotlin/net/corda/core/crypto/internal/ProviderMap.kt) : ajouter l'algorithme dans la liste des _providers_ ?
 - 
