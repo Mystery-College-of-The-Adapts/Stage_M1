@@ -11,7 +11,7 @@
 
 * Fichier `core/src/main/kotlin/net/corda/core/crypto/Crypto.kt` :
 
-```javascript
+```kotlin
 object Crypto
 ```
 
