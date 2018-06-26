@@ -7,6 +7,9 @@
 * Programmée en [Kotlin](https://kotlinlang.org), visant la JVM
 * Les Dapps (appelées _CorDapps_) sont programmables en __Java__ ou en __Kotlin__
 
-## Fichiers intéressants
+## Fichiers intéressants du 
 
 * core/src/main/kotlin/net/corda/core/crypto/Crypto.kt
+
+I think you should use an
+`<addr>` element here instead.
