@@ -197,9 +197,9 @@ $
 - On peut maintenant vérifier que notre image a bien été créée :
 ```
 $ docker images
-REPOSITORY  TAG			IMAGE ID  		CREATED 		SIZE
-multichain  compiled  	5e8e02f5a555  	40 seconds ago 	2.16GB
-ubuntu  	16.04 		5e8b97a2a082  	3 weeks ago 	114MB
+REPOSITORY  TAG       IMAGE ID      CREATED         SIZE
+multichain  compiled  5e8e02f5a555  40 seconds ago  2.16GB
+ubuntu      16.04     5e8b97a2a082  3 weeks ago     114MB
 $ 
 ```
 - Fini ! On peut maintenant lancer l'image et créer notre noeud Multichain :
