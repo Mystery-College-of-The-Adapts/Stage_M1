@@ -153,7 +153,7 @@ C'est donc l'implémentation de ces fonctions dans [pubkey.cpp](https://github.c
 
 ##  À regarder
 
-- 
+- Encodage/décodage de clés (sûrement des choses à modifier de ce côté)
 
 ## Installation
 
