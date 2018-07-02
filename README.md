@@ -25,3 +25,23 @@ En principe, si A veut communiquer avec B, A va chiffrer le message avec la clé
 - La __signature__ d’une information est le fait de chiffrer une information avec la clé secrète d’une entité. Ce procédé permet par exemple à B de prouver son identité auprès de A. Il lui suffit en effet d’envoyer à A un message clair (non chiffré) ![m](https://latex.codecogs.com/svg.latex?m) ainsi que le chiffré du message avec sa clé privée ![s_b](https://latex.codecogs.com/svg.latex?s_b). On note un tel chiffré ![{m}_sb](https://latex.codecogs.com/svg.latex?\\{m\\}_{s_b}).
 B envoie donc à A le couple ![(m, {m}_sb)](https://latex.codecogs.com/svg.latex?(m,\\{m\\}_{s_b})) et A, qui connaît ![pb](https://latex.codecogs.com/svg.latex?p_b) peut appliquer le chiffrement avec cette clé pour vérifier l’égalité ![{{m}_sb}_pb = m](https://latex.codecogs.com/svg.latex?\\{\\{m\\}_{s_b}\\}_{p_b}=m) 
 On considère en effet que pour tout couple de clés  ![(s_x, p_x)](https://latex.codecogs.com/svg.latex?(s_x,p_x)), ![{{m}_sx}_px} = {{m}_px}_sx} = m](https://latex.codecogs.com/svg.latex?\\{\\{m\\}_{s_x}\\}_{p_x}%20=%20\\{\\{m\\}_{p_x}\\}_{s_x}%20=%20m).
+
+## Étude des blockchains
+
+### Blockchains inspectées jusqu'ici
+
+- Corda https://www.corda.net
+- Hyperledger Fabric https://www.hyperledger.org/projects/fabric
+- Multichain https://www.multichain.com
+- Openchain https://www.openchain.org
+
+### Mode opératoire
+
+Pour chaque blockchain étudiée :
+
+- Compréhension de la technologie (contexte d'utilisation, méthodes utilisées, ...)
+- Survol du code open source
+- Compilation du code "as is" (pas toujours évidente) et essai de l'implémentation
+- Recherche de "fichiers intéressants", i.e. trouver l'ensemble fichiers implémentant les algorithmes utilisés pour la signature ainsi que l'ensemble des cas où ces algorithmes sont appelés
+- Essais de recompilations en faisant des modifications mineures de ces fichiers, pour voir l'impact sur l'ensemble du projet et la difficulté de l'ajout d'une librairie C dans le code (utilisation de la librairie [falcon](https://falcon-sign.info))
+- Une fois que tout fonctionne bien, modification en profondeur du code pour ajouter l'algorithme
