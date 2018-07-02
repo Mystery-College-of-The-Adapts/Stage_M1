@@ -119,7 +119,15 @@ private fun validatePublicKey(signatureScheme: SignatureScheme, key: PublicKey):
 
 > __Problème à partir d'ici :__ pour la génération des clés et la signature, toute la sécurité se base sur les packages de `java.security.*` (notamment les classes `Signature`, `{Private,Public}Key`, `KeyPairGenerator`) qui n'implémentent que des algorithmes spécifiques (voir [ici](https://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html#KeyPairGenerator)). Il faut donc créer des surclasses de ces classes qui implémentent notre algorithme et modifier le code en profondeur pour utiliser ces surclasses à la places de celles citées (ce qui est plus invasif).
 
+## Compilation
+
+- Utilisation de [Gradle](https://docs.gradle.org/) pour compiler le code
+
+Gradle va chercher le build actuel de Corda-Core sur le repo https://ci-artifactory.corda.r3cev.com/artifactory/corda-releases (à modifier, donc, pour mettre le nôtre, modifié, à la place)
+
+- Une commande : `./gradlew deployNodes` qui appelle Gradle pour construire tout le projet depuis le dossier racine.
+
 ## À regarder
 
 - [(...)/crypto/internal/ProviderMap.kt](https://github.com/corda/corda/blob/master/core/src/main/kotlin/net/corda/core/crypto/internal/ProviderMap.kt) : ajouter l'algorithme dans la liste des _providers_
-- 
+-
