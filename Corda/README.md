@@ -1,6 +1,6 @@
-## Corda
+# Corda
 
-# Avancée
+## Avancée
 
 - [x] Compréhension de la technologie (contexte d'utilisation, méthodes utilisées, ...)
 - [x] Survol du code open source
