@@ -26,6 +26,10 @@ En principe, si A veut communiquer avec B, A va chiffrer le message avec la clé
 B envoie donc à A le couple ![(m, {m}_sb)](https://latex.codecogs.com/svg.latex?(m,\\{m\\}_{s_b})) et A, qui connaît ![pb](https://latex.codecogs.com/svg.latex?p_b) peut appliquer le chiffrement avec cette clé pour vérifier l’égalité ![{{m}_sb}_pb = m](https://latex.codecogs.com/svg.latex?\\{\\{m\\}_{s_b}\\}_{p_b}=m) 
 On considère en effet que pour tout couple de clés  ![(s_x, p_x)](https://latex.codecogs.com/svg.latex?(s_x,p_x)), ![{{m}_sx}_px} = {{m}_px}_sx} = m](https://latex.codecogs.com/svg.latex?\\{\\{m\\}_{s_x}\\}_{p_x}%20=%20\\{\\{m\\}_{p_x}\\}_{s_x}%20=%20m).
 
+## Motivations
+
+La __cryptographie post-quantique__ est la construction d'outils cryptographiques ayant la particularité de résister à des attaques utilisant un __ordinateur quantique__. On sait aujourd'hui que l'arrivée d'un tel ordinateur permettrait d'implémenter des algorithmes (dits quantiques) remettant en cause la sécurité des algorithmes utilisés à l'heure actuelle dans touts les systèmes informatiques sécurisés, dont les blockchains. Par exemple, la sécurité de l'algorithme de signature [ECDSA](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm), utilisé par Bitcoin et la plupart des cryptomonnaies et blockchains aujourd'hui, se verrait totalement remise en cause. On comprend alors facilement la nécessité de mettre en place dès maintenant des alternatives à ECDSA et aux algorithmes ne résistant pas à l'ordinateur quantique dans les implémentations des blockchains les plus répandues.
+
 ## Étude des blockchains
 
 ### Blockchains inspectées jusqu'ici
