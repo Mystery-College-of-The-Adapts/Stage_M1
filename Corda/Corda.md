@@ -123,10 +123,10 @@ private fun validatePublicKey(signatureScheme: SignatureScheme, key: PublicKey):
 
 - Utilisation de [Gradle](https://docs.gradle.org/) pour compiler le code
 
-Gradle va chercher le build actuel de Corda-Core dans plusieurs repos possibles (à modifier, donc, pour mettre le nôtre, modifié, à la place)
+Gradle va chercher le build actuel de Corda-Core dans plusieurs repos possibles (à modifier donc, pour mettre notre version modifiée du core à la place).
 
 - Une commande : `./gradlew deployNodes` qui appelle Gradle pour construire tout le projet depuis le dossier racine.
-- La compilation du core de Corda est trèèèèèès longue (une heure environ) en raison du grand nombre de tests effectué.
+- La compilation du core de Corda est trèèèèèès longue (une heure environ) en raison du grand nombre de tests effectués.
 
 ## À regarder
 
