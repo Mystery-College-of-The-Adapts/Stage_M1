@@ -123,11 +123,14 @@ private fun validatePublicKey(signatureScheme: SignatureScheme, key: PublicKey):
 
 - Utilisation de [Gradle](https://docs.gradle.org/) pour compiler le code
 
-Gradle va chercher le build actuel de Corda-Core sur le repo https://ci-artifactory.corda.r3cev.com/artifactory/corda-releases (à modifier, donc, pour mettre le nôtre, modifié, à la place)
+Gradle va chercher le build actuel de Corda-Core dans plusieurs repos possibles (à modifier, donc, pour mettre le nôtre, modifié, à la place)
 
 - Une commande : `./gradlew deployNodes` qui appelle Gradle pour construire tout le projet depuis le dossier racine.
+- La compilation du core de Corda est trèèèèèès longue (une heure environ) en raison du grand nombre de tests effectué.
 
 ## À regarder
 
 - [(...)/crypto/internal/ProviderMap.kt](https://github.com/corda/corda/blob/master/core/src/main/kotlin/net/corda/core/crypto/internal/ProviderMap.kt) : ajouter l'algorithme dans la liste des _providers_
--
+- Implémentation de code C dans Kotlin :
+	- Outil : [cinterop](https://kotlinlang.org/docs/tutorials/native/interop-with-c.html)
+	- Fichier `.def` à créer
