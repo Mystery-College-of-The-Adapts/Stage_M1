@@ -39,9 +39,9 @@ On considère en effet que pour tout couple de clés  ![(s_x, p_x)](https://late
 
 Pour chaque blockchain étudiée :
 
-- Compréhension de la technologie (contexte d'utilisation, méthodes utilisées, ...)
-- Survol du code open source
-- Compilation du code "as is" (pas toujours évidente) et essai de l'implémentation
-- Recherche de "fichiers intéressants", i.e. trouver l'ensemble fichiers implémentant les algorithmes utilisés pour la signature ainsi que l'ensemble des cas où ces algorithmes sont appelés
-- Essais de recompilations en faisant des modifications mineures de ces fichiers, pour voir l'impact sur l'ensemble du projet et la difficulté de l'ajout d'une librairie C dans le code (utilisation de la librairie [falcon](https://falcon-sign.info))
-- Une fois que tout fonctionne bien, modification en profondeur du code pour ajouter l'algorithme
+- [ ] Compréhension de la technologie (contexte d'utilisation, méthodes utilisées, ...)
+- [ ] Survol du code open source
+- [ ] Compilation du code "as is" (pas toujours évidente) et essai de l'implémentation
+- [ ] Recherche de "fichiers intéressants", i.e. trouver l'ensemble fichiers implémentant les algorithmes utilisés pour la signature ainsi que l'ensemble des cas où ces algorithmes sont appelés
+- [ ] Essais de recompilations en faisant des modifications mineures de ces fichiers, pour voir l'impact sur l'ensemble du projet et la difficulté de l'ajout d'une librairie C dans le code (utilisation de la librairie [falcon](https://falcon-sign.info))
+- [ ] Une fois que tout fonctionne bien, modification en profondeur du code pour ajouter l'algorithme
