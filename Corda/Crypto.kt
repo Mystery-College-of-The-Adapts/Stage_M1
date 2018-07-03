@@ -438,7 +438,10 @@ object Crypto {
             "Unsupported key/algorithm for schemeCodeName: ${signatureScheme.schemeCodeName}"
         }
         require(clearData.isNotEmpty()) { "Signing of an empty array is not permitted!" }
-        val signature = Signature.getInstance(signatureScheme.signatureName, providerMap[signatureScheme.providerName])
+
+        val signature = MySignature(signatureScheme.signatureName, providerMap[signatureScheme.providerName])
+
+        /*val signature = Signature.getInstance(signatureScheme.signatureName, providerMap[signatureScheme.providerName])*/
         signature.initSign(privateKey)
         signature.update(clearData)
         return signature.sign()
