@@ -117,7 +117,17 @@ private fun validatePublicKey(signatureScheme: SignatureScheme, key: PublicKey):
 }
 ```
 
+Autre fichier à modifier, [CryptoUtilsTest.kt](https://github.com/corda/corda/blob/master/core/src/test/kotlin/net/corda/core/crypto/CryptoUtilsTest.kt) l.349 :
+
+```kotlin
+val expectedAlgSet = setOf("RSA_SHA256", "ECDSA_SECP256K1_SHA256", "ECDSA_SECP256R1_SHA256", "EDDSA_ED25519_SHA512", "SPHINCS-256_SHA512", "COMPOSITE", "MON_ALGO")
+```
+
+(il s'agit de l'ensemble des algorithmes attendus par Corda)
+
 > __Problème à partir d'ici :__ pour la génération des clés et la signature, toute la sécurité se base sur les packages de `java.security.*` (notamment les classes `Signature`, `{Private,Public}Key`, `KeyPairGenerator`) qui n'implémentent que des algorithmes spécifiques (voir [ici](https://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html#KeyPairGenerator)). Il faut donc créer des surclasses de ces classes qui implémentent notre algorithme et modifier le code en profondeur pour utiliser ces surclasses à la places de celles citées (ce qui est plus invasif).
+
+
 
 ## Compilation
 
