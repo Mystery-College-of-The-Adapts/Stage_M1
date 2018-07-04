@@ -10,9 +10,20 @@ import java.security.InvalidKeyException;
 public class MySignature {
 	private Signature sig;
 	private boolean isStandardSig;
+	private byte[] falcon_priv_key;
+	private byte[] falcon_signature_nonce;
+	private byte[] falcon_data_to_sign;
+
+	private native byte[] do_falcon_sign(byte[] priv_key, byte[] data_to_sign);
+
+	static {
+		System.loadLibrary("falcon_jni");
+	}
 
 	public MySignature(String algorithm, Provider provider) throws NoSuchAlgorithmException {
-		if (algorithm.equals("Mon Algorithme")){
+		falcon_signature_nonce = new byte[40];
+
+		if (algorithm.equals("Falcon")) {
 		/* Choses spécifiques à mon algo, initialisations etc. */
 			this.isStandardSig = false;
 		} else {
@@ -25,7 +36,10 @@ public class MySignature {
 		if (isStandardSig) {
 			sig.initSign(privateKey);
 		} else {
-			/* Choses spécifiques à mon algo */
+			/* Choses spécifiques à mon algo :
+			 * - Récupérer la clé privée
+			 * - TODO : initialiser falcon avec falcon_sign_start() */
+			falcon_priv_key = privateKey.getEncoded();
 		}
 	}
 
@@ -34,6 +48,7 @@ public class MySignature {
 			sig.update(data);
 		} else {
 			/* Choses spécifiques à mon algo */
+			falcon_data_to_sign = data;
 		}
 	}
 
@@ -41,8 +56,9 @@ public class MySignature {
 		if (isStandardSig) {
 			return sig.sign();
 		} else {
-			/* Choses spécifiques à mon algo */
-			return null;
+			/* Choses spécifiques à falcon */
+			byte[] tmp = do_falcon_sign(falcon_priv_key, falcon_data_to_sign);
+			return tmp;
 		}
 	}
 }

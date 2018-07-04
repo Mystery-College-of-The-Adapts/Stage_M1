@@ -1,0 +1,8 @@
+# Compilation classe Java
+javac MySignature.java
+# Création du header jni
+cd ~/Documents/Stage_M1/corda/core/src/main/java
+javah -jni net.corda.core.crypto.MySignature
+
+# Génération de la librairie
+gcc -shared -o falcon_jni.so net_corda_core_crypto_MySignature.o falcon/falcon-enc.o falcon/falcon-vrfy.o falcon/frng.o falcon/shake.o falcon/falcon-fft.o falcon/falcon-keygen.o falcon/falcon-sign.o
