@@ -139,7 +139,6 @@ Gradle va chercher le build actuel de Corda-Core dans plusieurs repos possibles 
 
 ## À regarder
 
-- [(...)/crypto/internal/ProviderMap.kt](https://github.com/corda/corda/blob/master/core/src/main/kotlin/net/corda/core/crypto/internal/ProviderMap.kt) : ajouter l'algorithme dans la liste des _providers_
-- Implémentation de code C dans Kotlin :
-	- Outil : [cinterop](https://kotlinlang.org/docs/tutorials/native/interop-with-c.html)
-	- Fichier `.def` à créer
+- Implémentation de code C dans Java :
+	- Outil : [JNI](https://fr.wikipedia.org/wiki/Java_Native_Interface)
+	- VOIR  : [jni.md](https://github.com/b1d0u/Stage_M1/blob/master/Corda/jni.md)
