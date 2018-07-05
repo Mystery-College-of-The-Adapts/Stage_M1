@@ -37,21 +37,20 @@ object Crypto {
   /* [...] */
   
   /* DEBUT AJOUT */
-  
+  /** MON_ALGO */
   @JvmField
-  val MON_ALGO = SignatureScheme(
+  val FALCON = SignatureScheme(
     7,   
-    "NOM_DE_CODE_DE_MON_ALGO",
-    AlgorithmIdentifier(ASN1ObjectIdentifier("OID_DE_MON_ALGO"), null/* paramètres de l'algorithmes (e.g. courbe pour ECDSA) */),
-    listOf(AlgorithmIdentifier(ASN1ObjectIdentifier("OID_algo_alternatif"), "Paramètres_algo_alternatif")),
-    "Nom du fournisseur de mon l'algo",
-    "Nom de mon algo",
-    "Nom de la signature",
-    null/* spec de l'algorithme*/,
-    256/* taille de la clé */, 
-    "Description de mon algo."
-  )
-
+    "FALCON",
+    AlgorithmIdentifier(FalconProvider.FALCON_KEY),
+    emptyList() /* Alternatives */,
+    FalconProvider.PROVIDER_NAME /* nom du provider */,
+    "Falcon-512" /* nom de l'algorithme */,
+    "FalconSign" /* nom de l'algo de signature */,
+    null /* specs de l'algorithme (e.g. courbe pour l'ECC) */,
+    2305 /* taille de la clé privée */,
+    "Falcon signature scheme : https://falcon-sign.info"
+  )    
   /* FIN AJOUT */
   
   /* [...] */
