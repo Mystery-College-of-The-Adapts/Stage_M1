@@ -135,7 +135,7 @@ val expectedAlgSet = setOf("RSA_SHA256", "ECDSA_SECP256K1_SHA256", "ECDSA_SECP25
 Gradle va chercher le build actuel de Corda-Core dans plusieurs repos possibles (à modifier donc, pour mettre notre version modifiée du core à la place).
 
 - Une commande : `./gradlew deployNodes` qui appelle Gradle pour construire tout le projet depuis le dossier racine.
-- La compilation du core de Corda est trèèèèèès longue (une heure environ) en raison du grand nombre de tests effectués.
+- La compilation du core de Corda est trèèèèèès longue (une heure environ) en raison du grand nombre de tests effectués (les tests peuvent être évités en buildant avec la variable d'environnement CORDA_DOCS_ONLY_BUILD non vide mais ils sont très important dès que l'on modifie le code de la crypto).
 
 ## À regarder
 
