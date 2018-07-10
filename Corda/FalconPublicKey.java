@@ -1,10 +1,9 @@
 package net.corda.core.crypto;
 
 import java.security.PublicKey;
+import java.io.IOException;
 
 public class FalconPublicKey implements PublicKey {
-	private static final String ALG_NAME = "Falcon-512";
-	private static final String ENCODING = "None";
 	private byte[] encoded_key;
 
 	public FalconPublicKey(byte[] encoded_key) {
@@ -12,14 +11,24 @@ public class FalconPublicKey implements PublicKey {
 	}
 
 	public String getAlgorithm() {
-		return ALG_NAME;
+		return FalconProvider.ALG_NAME;
 	}
 
 	public String getFormat() {
-		return ENCODING; 
+		return "X.509";
 	}
 
 	public byte[] getEncoded() {
 		return encoded_key;
+	}
+
+	public String toString() {
+		String s = "0x";
+
+		for (byte b : encoded_key) {
+			s = s + String.format("%02x", b);
+		}
+
+		return s;
 	}
 }

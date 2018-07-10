@@ -7,9 +7,14 @@ import java.security.PublicKey;
 import java.security.SignatureException;
 import java.security.InvalidKeyException;
 import java.security.SignatureSpi;
+import java.security.AlgorithmParameters;
+import java.security.InvalidParameterException;
+import java.security.SignatureException;
+import java.security.spec.AlgorithmParameterSpec;
+import java.security.InvalidAlgorithmParameterException;
 
 /* Falcon Signature Service Provider Interface */
-public abstract class FalconSignature extends SignatureSpi {
+public final class FalconSignature extends SignatureSpi {
 	private byte[] falcon_key;
 	private byte[] falcon_data_to_sign;
 
@@ -36,16 +41,21 @@ public abstract class FalconSignature extends SignatureSpi {
 	}
 
 	protected void engineInitVerify(PublicKey publicKey) throws InvalidKeyException {
-		if (!(publicKey instanceof FalconPublicKey)) {
-			throw new InvalidKeyException("Not a Falcon public key !");
+		if (!(publicKey.getFormat().equals("X.509")) && !(publicKey instanceof FalconPublicKey)) {
+			throw new InvalidKeyException("Not a valid Falcon public key : " + publicKey.getFormat());
 		}
 
 		falcon_key = publicKey.getEncoded();
 	}
 
-	protected void engineUpdate(byte[] data) {
-		/* Choses spécifiques à Falcon */
-		falcon_data_to_sign = data;
+	protected void engineUpdate(byte b) {
+		falcon_data_to_sign = new byte[1];
+		falcon_data_to_sign[0] = b;
+	}
+
+	protected void engineUpdate(byte[] b, int off, int len) throws SignatureException {
+		falcon_data_to_sign = new byte[len];
+		System.arraycopy(b, off, falcon_data_to_sign, 0, len);
 	}
 
 	protected byte[] engineSign() {
@@ -64,5 +74,23 @@ public abstract class FalconSignature extends SignatureSpi {
 		int res = do_falcon_verify(falcon_key, signature);
 
 		return (res != 0);
+	}
+
+	protected AlgorithmParameters engineGetParameters() throws InvalidParameterException {
+		/* Pas de paramètres à notre algo */
+		return null;
+	}
+
+	protected AlgorithmParameters engineGetParameter(String param) throws InvalidParameterException {
+		/* Pas de paramètres à notre algo */
+		return null;
+	}
+
+	protected void engineSetParameter(AlgorithmParameterSpec params) throws InvalidAlgorithmParameterException {
+		
+	}
+
+	protected void engineSetParameter(String param, Object value) throws InvalidParameterException {
+	
 	}
 }
