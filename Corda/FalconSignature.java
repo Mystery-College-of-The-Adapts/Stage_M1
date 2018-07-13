@@ -1,7 +1,5 @@
 package net.corda.core.crypto;
 
-import java.security.Signature;
-import java.security.Provider;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SignatureException;
@@ -25,7 +23,7 @@ public final class FalconSignature extends SignatureSpi {
 	/* Chargement de la librairie falcon */
 	static {
 		/* TODO : Chemin fixe, à modifier pour avoir quelque chose de dynamique */
-		System.load("/Users/Brieuc/Documents/Stage_M1/corda/core/src/main/java/net/corda/core/crypto/falcon_jni.so");
+		System.load("/Users/Brieuc/Documents/Stage_M1/corda/core/src/main/java/net/corda/core/crypto/falcon_signature_jni.so");
 	}
 
 	public FalconSignature() {

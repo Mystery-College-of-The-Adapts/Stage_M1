@@ -176,24 +176,27 @@ object Crypto {
     /* DEBUT AJOUT */
     /** MON_ALGO */
     @JvmField
-    val MON_ALGO = SignatureScheme(
+    val FALCON = SignatureScheme(
             7,
-            "NOM_DE_CODE_DE_MON_ALGO",
-            AlgorithmIdentifier(null, null/* paramètres de l'algorithmes (e.g. courbe pour ECDSA) */),
-            emptyList(),
-            "Nom du fournisseur de mon l'algo",
-            "Nom du fournisseur de mon l'algo",
-            "Nom de la signature de mon algo",
-            null/* spec de l'algorithme*/,
-            256/* taille de la clé */,
-            "Description de mon algo"
+            "FALCON",
+            AlgorithmIdentifier(FalconProvider.FALCON_KEY),
+            emptyList() /* Alternatives */,
+            FalconProvider.PROVIDER_NAME /* nom du provider */,
+            "FALCON512" /* nom de l'algorithme */,
+            "FALCON512" /* nom de l'algo de signature */,
+            null /* specs de l'algorithme (e.g. courbe pour l'ECC) */,
+            2305 /* taille de la clé privée */,
+            "Falcon signature scheme : https://falcon-sign.info"
     )
     /* FIN AJOUT */
 
     /** Our default signature scheme if no algorithm is specified (e.g. for key generation). */
+    /*
     @JvmField
     val DEFAULT_SIGNATURE_SCHEME = EDDSA_ED25519_SHA512
-
+    */
+    @JvmField
+    val DEFAULT_SIGNATURE_SCHEME = FALCON
     /**
      * Supported digital signature schemes.
      * Note: Only the schemes added in this map will be supported (see [Crypto]).
@@ -205,7 +208,7 @@ object Crypto {
             EDDSA_ED25519_SHA512,
             SPHINCS256_SHA256,
             COMPOSITE_KEY,
-            MON_ALGO/* AJOUT */
+            FALCON/* AJOUT */
     ).associateBy { it.schemeCodeName }
 
     /**
@@ -239,7 +242,7 @@ object Crypto {
     @JvmStatic
     fun findSignatureScheme(algorithm: AlgorithmIdentifier): SignatureScheme {
         return algorithmMap[normaliseAlgorithmIdentifier(algorithm)]
-                ?: throw IllegalArgumentException("Unrecognised algorithm: ${algorithm.algorithm.id}")
+                ?: throw IllegalArgumentException("Unrecognised algorithm : ${algorithm.algorithm.id}")
     }
 
     /**
@@ -439,9 +442,7 @@ object Crypto {
         }
         require(clearData.isNotEmpty()) { "Signing of an empty array is not permitted!" }
 
-        val signature = MySignature(signatureScheme.signatureName, providerMap[signatureScheme.providerName])
-
-        /*val signature = Signature.getInstance(signatureScheme.signatureName, providerMap[signatureScheme.providerName])*/
+        val signature = Signature.getInstance(signatureScheme.signatureName, providerMap[signatureScheme.providerName])
         signature.initSign(privateKey)
         signature.update(clearData)
         return signature.sign()
@@ -949,7 +950,7 @@ object Crypto {
             is BCECPublicKey, is EdDSAPublicKey -> publicKeyOnCurve(signatureScheme, key)
             is BCRSAPublicKey -> key.modulus.bitLength() >= 2048 // Although the recommended RSA key size is 3072, we accept any key >= 2048bits.
             is BCSphincs256PublicKey -> true
-            is MonAlgoPublicKey /* AJOUT */ -> true
+            is FalconPublicKey /* AJOUT */ -> true
             else -> throw IllegalArgumentException("Unsupported key type: ${key::class}")
         }
     }
@@ -960,7 +961,7 @@ object Crypto {
             is BCECPrivateKey -> key.parameters == signatureScheme.algSpec
             is EdDSAPrivateKey -> key.params == signatureScheme.algSpec
             is BCRSAPrivateKey, is BCSphincs256PrivateKey -> true // TODO: Check if non-ECC keys satisfy params (i.e. approved/valid RSA modulus size).
-            is MonAlgoPrivateKey /* AJOUT */ -> true
+            is FalconPrivateKey /* AJOUT */ -> true
             else -> throw IllegalArgumentException("Unsupported key type: ${key::class}")
         }
     }
